@@ -1,0 +1,58 @@
+### Teste - Cadastrar Categoria
+POST http://localhost:5169/api/categoria/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Teste"
+}
+
+###
+
+### Teste - Listar Categorias
+GET http://localhost:5169/api/categoria/listar
+Content-Type: application/json
+
+###
+
+### Teste - Criar Tarefas
+POST http://localhost:5169/api/tarefa/cadastrar
+Content-Type: application/json
+
+{
+    "descricao": "teste",
+    "concluida": false,
+    "categoriaId": 1    
+}
+
+###
+
+### Teste - Listar Tarefas
+GET http://localhost:5169/api/tarefa/listar
+Content-Type: application/json
+
+###
+
+### Teste - Alterar Tarefa
+PUT http://localhost:5169/api/tarefa/alterar/1
+Content-Type: application/json
+
+{
+    "tarefaId": 1,
+    "descricao": "Estudar que não sei oq lá",
+    "concluida": false,
+    "categoriaId": 1
+}
+
+###
+
+### Teste - Tarefas Não Concluídas
+GET http://localhost:5169/api/tarefa/naoconcluidas
+Content-Type: application/json
+
+###
+
+### Teste - Tarefas Concluídas
+GET http://localhost:5169/api/tarefa/concluidas
+Content-Type: application/json
+
+###

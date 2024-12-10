@@ -14,19 +14,26 @@ using Microsoft.EntityFrameworkCore;
 
     // POST: api/tarefa/cadastrar
         [HttpPost("cadastrar")]
-    public async Task<ActionResult<Tarefa>> CadastrarTarefa([FromBody] Tarefa tarefa)
+public async Task<ActionResult<Tarefa>> CadastrarTarefa([FromBody] Tarefa tarefa)
+{
+    if (tarefa == null)
     {
-        if (tarefa == null)
-        {
-            return BadRequest("A tarefa é obrigatória.");
-        }
-
-        _context.Tarefas.Add(tarefa);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(ListarTarefas), new { id = tarefa.TarefaId }, tarefa);
+        return BadRequest("A tarefa é obrigatória.");
     }
 
+    try
+    {
+        _context.Tarefas.Add(tarefa);
+        await _context.SaveChangesAsync();
+        return CreatedAtAction(nameof(ListarTarefas), new { id = tarefa.TarefaId }, tarefa);
+    }
+    catch (Exception ex)
+    {
+        // Logando o erro para ajudar na depuração
+        Console.WriteLine($"Erro ao salvar tarefa: {ex.Message}");
+        return StatusCode(500, "Erro ao cadastrar tarefa.");
+    }
+}
     // GET: api/tarefa/listar
     [HttpGet("listar")]
     public async Task<ActionResult<IEnumerable<Tarefa>>> ListarTarefas()
